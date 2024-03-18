@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage} from 'mdb-react-ui-kit';
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn } from 'mdb-react-ui-kit';
 import img from '../../assets/img1.jpg'
+
 import axios from 'axios';
 
 function Profile() {

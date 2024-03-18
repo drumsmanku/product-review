@@ -35,7 +35,7 @@ function Register() {
     email: '',
     mobile: '',
     password: '',
-    isAdmin: false, 
+    isAdmin: false, // Initially set isAdmin to false
   });
   const handleChange = e => {
     setUser({
@@ -43,6 +43,8 @@ function Register() {
       [e.target.name]: e.target.value
     });
   };
+  const isAdmin = useSelector(state => state.isAdmin.isAdmin);
+  const isTeamMember = useSelector(state => state.isAdmin.isTeamMember);
   const handleCheckboxChange = (e) => {
     setUser({
       ...user,

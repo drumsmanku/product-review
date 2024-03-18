@@ -9,7 +9,7 @@ import {
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 
-function Sidebar({setShowButton, setShowProfile}) {
+function Sidebar({showButton, setShowButton, showProfile, setShowProfile}) {
   return (
     <div style={{ display: 'flex', height: '125vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#333">
@@ -25,7 +25,7 @@ function Sidebar({setShowButton, setShowProfile}) {
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
             <NavLink  onClick={()=>{setShowButton(true); setShowProfile(false)}} activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Pending Requests</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user">My Submissions</CDBSidebarMenuItem>
             </NavLink>
             <NavLink  onClick={()=>{setShowButton(false); setShowProfile(true)}} activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>

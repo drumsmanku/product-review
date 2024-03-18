@@ -9,7 +9,7 @@ import {
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 
-function Sidebar({setShowButton, setShowProfile}) {
+function Sidebar({showButton, setShowButton, showProfile, setShowProfile}) {
   return (
     <div style={{ display: 'flex', height: '125vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#333">

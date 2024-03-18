@@ -3,6 +3,7 @@ import Sidebar from './Sidebar'
 import styles from './Dashboard.module.css'
 import Profile from './Profile'
 import { useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import ProductCard from '../../helpers/ProductCard';
 import Pagination from '@mui/material/Pagination';
@@ -52,14 +53,16 @@ function Dashboard() {
     setIsLoggedIn(false);
     
   }
-
+  const handleAdd = () => {
+    setShowAddModal(true);
+  };
 
   const handleProductClick = productId => {
-   
+    // Send request to backend with productId
     axios
       .get(`https://product-review-y121.onrender.com/products/${productId}`)
       .then(res => {
-        
+        // Assuming you have a route defined for product details, navigate to it with product data
         navigate(`/product/${productId}`, { state: { product: res.data } });
         console.log("done")
       })
@@ -115,7 +118,7 @@ function Dashboard() {
                     <div className={styles.mainContent}>
                         
                       {
-                       
+                        // Change this from products.map to currentItems.map
                         currentItems.map((product, idx) => (
                           <ProductCard key={product.id} data={product} onClick={() => handleProductClick(product.id)} />
                         ))
@@ -152,7 +155,15 @@ function Dashboard() {
           </>
             
           )
-        } 
+        }
+        
+        
+          
+          
+          
+          
+        
+      
       </div>
     </div>
   )

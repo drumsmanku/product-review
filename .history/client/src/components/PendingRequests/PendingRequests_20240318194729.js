@@ -16,7 +16,7 @@ function PendingRequests({change, setChange}) {
     axios
       .get(`https://product-review-y121.onrender.com/products/${productId}`)
       .then(res => {
-      
+        // Assuming you have a route defined for product details, navigate to it with product data
         navigate(`/product/${productId}`, { state: { product: res.data } });
         console.log("done")
       })

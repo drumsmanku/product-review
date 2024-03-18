@@ -33,6 +33,8 @@ function Login() {
     password: '',
   });
 
+  const isAdmin = useSelector(state => state.isAdmin.isAdmin);
+  const isTeamMember = useSelector(state => state.isAdmin.isTeamMember);
  
   const handleChange = e => {
     setUser({
@@ -67,7 +69,13 @@ function Login() {
       .catch(err => console.log(err));
   };
 
+  const handleAdminChange = () => {
+    dispatch(setAdminStatus(true));
+  };
 
+  const handleTeamMemberChange = () => {
+    dispatch(setTeamMemberStatus(true));
+  };
   return (
     <div className={styles.container}>
       <div className={styles.heading}>

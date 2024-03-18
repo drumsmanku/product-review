@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField'
+import {  setAdminStatus, setTeamMemberStatus } from '../../store/features/isAdminSlice';
 import { useSelector } from 'react-redux';
+import { Button } from 'bootstrap';
 import axios from 'axios';
 
 const inputStyles={

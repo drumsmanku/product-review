@@ -28,7 +28,7 @@ function ApprovalCard({data, change, setChange}) {
   
     } ).then(()=>{setChange(!change); navigate('/dashboard-admin')}).catch(err=>console.log(err));
 
-    axios.put(`hhttps://product-review-y121.onrender.com/products/${data.id}`,{
+    axios.put(`http://localhost:4000/products/${data.id}`,{
       productName:data.productName,
       price:data.price,
       image:data.image,
@@ -43,7 +43,7 @@ function ApprovalCard({data, change, setChange}) {
   }
 
   const handleReject=()=>{
-    axios.patch(`https://product-review-y121.onrender.com/products/review/${data._id}/status`,{status:"rejected"})
+    axios.patch(`http://localhost:4000/products/review/${data._id}/status`,{status:"rejected"})
           .then(() => {
             setChange(!change);
             navigate('/dashboard-admin');

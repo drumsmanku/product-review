@@ -1,18 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import Sidebar from './Sidebar'
-import styles from './Dashboard.module.css'
-import Profile from './Profile'
+import styles from './DashboardAdmin.module.css'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axios from 'axios';
+import Profile from './Profile';
 import ProductCard from '../../helpers/ProductCard';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import MySubmissions from '../MySubmissions/MySubmissions'
+import PendingRequests from '../PendingRequests/PendingRequests'
 
 
 
 
-function Dashboard() {
+function DashboardAdmin() {
   const navigate =useNavigate();
   const [products, setProduts]=useState([])
   const [isLoggedIn, setIsLoggedIn]=useState(false);
@@ -20,6 +20,7 @@ function Dashboard() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showButton, setShowButton]= useState(false);
   const [showProfile, setShowProfile]=useState(false);
+  const [change, setChange]=useState(false)
   const [page, setPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6); 
 
@@ -52,14 +53,16 @@ function Dashboard() {
     setIsLoggedIn(false);
     
   }
-
+  const handleAdd = () => {
+    setShowAddModal(true);
+  };
 
   const handleProductClick = productId => {
-   
+    // Send request to backend with productId
     axios
       .get(`https://product-review-y121.onrender.com/products/${productId}`)
       .then(res => {
-        
+        // Assuming you have a route defined for product details, navigate to it with product data
         navigate(`/product/${productId}`, { state: { product: res.data } });
         console.log("done")
       })
@@ -97,30 +100,27 @@ function Dashboard() {
         </div>
         {
           showProfile?
-           isLoggedIn?
+            isLoggedIn?
             <Profile/>
             :
             <p>Please login/register first</p>
-          
           :
-          (<>
-            {
-              !showButton?
-              (
-                
-                isLoggedIn?
-                <>
-                
+          <>
+              {
+                !showButton?
+                (
+                  
+                  isLoggedIn?
                   <div style={{width:'100%', display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
                     <div className={styles.mainContent}>
                         
                       {
-                       
+                        // Change this from products.map to currentItems.map
                         currentItems.map((product, idx) => (
                           <ProductCard key={product.id} data={product} onClick={() => handleProductClick(product.id)} />
                         ))
                       }
-    
+
                         
                     </div>
                     <Stack sx={{marginTop:'2rem'}} spacing={2}>
@@ -132,30 +132,34 @@ function Dashboard() {
                         />
                     </Stack>
                   </div>
-                </>
+                  :
+                  <>
+                    <p>Please login/register first</p>
+                  </>
                 
-                :
-                <>
-                  <p>Please login/register first</p>
-                </>
-              
-              ):
-              (
-                isLoggedIn?(
-                  <MySubmissions/>
                 ):
                 (
-                  <p>Please login/register first</p>
+                  isLoggedIn?(
+                    <PendingRequests change={change} setChange={setChange}/>
+                  ):
+                  (
+                    <p>Please login/register first</p>
+                  )
                 )
-              )
-            }
+              }
           </>
-            
-          )
-        } 
+        }
+        
+        
+          
+          
+          
+          
+        
+      
       </div>
     </div>
   )
 }
 
-export default Dashboard
+export default DashboardAdmin
