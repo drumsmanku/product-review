@@ -1,0 +1,64 @@
+import React, { useState, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+const inputStyles={
+  width:'100%'
+}
+const buttonStyles={
+  backgroundColor:'#36416A',
+  border:'none',
+  borderRadius:'2rem',
+  padding:'0.5rem',
+  color:'white'
+}
+
+function ProductDetailOnAdmin() {
+  const navigate=useNavigate();
+  const location = useLocation();
+  const { product } = location.state;
+  const[productFields, setProductFields]=useState({
+    productName:product.productName,
+    price:product.price,
+    image:product.image,
+    productDescription:product.productDescription,
+    department:product.department,
+    id:product.id,
+    memberId:product._id,
+    author:localStorage.getItem('user'),
+    status:'pending'
+
+  });
+  return (
+    <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center', border:'2px solid black'}}>
+    <div style={{ width:'30%', display:'flex', flexDirection:'column', alignItems:'center' }}>
+      <img src={productFields.image} alt="prod" width={300}/>
+      <p>Click on the image to change it</p>
+    </div>
+
+   <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },
+        display: 'flex',
+        flexDirection:'column',
+        width: '40%',
+        border: '1px solid black',
+        padding: '1rem'
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      
+      <TextField id="standard-basic" style={inputStyles} label="Name" name='productName' value={productFields.productName} onChange={handleChange} variant="standard" />
+      <TextField id="standard-basic" label="Price" style={inputStyles} name='price' value={productFields.price} onChange={handleChange} variant="standard" />
+      <TextField id="standard-basic" label="Image" style={inputStyles} name='image' value={productFields.image} onChange={handleChange} variant="standard" />
+      <TextField id="standard-basic" label="Description" style={inputStyles} name='productDescription' value={productFields.productDescription} onChange={handleChange} variant="standard" />
+      <TextField id="standard-basic" label="Department" style={inputStyles} name='department' value={productFields.department} onChange={handleChange} variant="standard" />
+      {isAdmin?<button type='button' onClick={handleProductSubmit} style={buttonStyles}>Update Product as Admin</button>:<button type='button' onClick={handleProductChange} style={buttonStyles}>Submit changes for approval</button>}
+      
+    </Box>
+  </div>
+  )
+}
+
+export default ProductDetailOnAdmin
